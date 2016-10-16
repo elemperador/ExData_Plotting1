@@ -17,11 +17,11 @@ mergedDateAndTime <- paste(filtered$Date, filtered$Time, sep = "-")
 ## Create a single date and time formated column
 timeFormated <- ymd_hms(mergedDateAndTime)
 
-## Plot power against time
-plot(y=filtered$Global_active_power, x=timeFormated, type="l", ylab = "Global Active Power (kilowatts)")
-
 ## Create png with specified dimensions
 png('plot2.png', width = 480, height = 480)
+
+## Plot power against time
+plot(y=filtered$Global_active_power, x=timeFormated, type="l", ylab = "Global Active Power (kilowatts)")
 
 ## Copy the displayed plot into the file
 dev.copy(png,'plot2.png')

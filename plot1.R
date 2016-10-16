@@ -6,7 +6,7 @@
 require("dplyr")
 
 ## Read data from source
-rawData <- read.csv("household_power_consumption.txt", sep = ";")
+rawData <- read.csv("household_power_consumption.txt", sep = ";", na.strings=c("?","NA"))
 
 ## Reformat date
 rawData$Date <- as.Date(rawData$Date, "%d/%m/%Y")
@@ -14,11 +14,11 @@ rawData$Date <- as.Date(rawData$Date, "%d/%m/%Y")
 ## Filter dataset with period of interest
 filtered <- rawData %>% select(Date, Time, Global_active_power, Global_reactive_power, Voltage, Global_intensity, Sub_metering_1, Sub_metering_2, Sub_metering_3) %>% filter(Date >= "2007-02-01" & Date <= "2007-02-02")
 
-## Plot a histogram
-hist(as.numeric(as.character(filtered$Global_active_power)), col="red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
-
 ## Create png with specified dimensions
 png('plot1.png', width = 480, height = 480)
+
+## Plot a histogram
+hist(as.numeric(as.character(filtered$Global_active_power)), col="red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 
 ## Copy the displayed plot into the file
 dev.copy(png,'plot1.png')

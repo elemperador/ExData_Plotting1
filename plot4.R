@@ -17,6 +17,9 @@ mergedDateAndTime <- paste(filtered$Date, filtered$Time, sep = "-")
 ## Create a single date and time formated column
 timeFormated <- ymd_hms(mergedDateAndTime)
 
+## Create png with specified dimensions
+png('plot4.png', width = 480, height = 480)
+
 ## Configure graphs layout
 par(mfrow = c(2, 2))
 
@@ -29,9 +32,9 @@ plot(y=filtered$Global_active_power, x=timeFormated, type="l", ylab = "Global Ac
 plot(y=filtered$Voltage, x=timeFormated, type = "l", ylab = "Voltage")
 
 ## Third Plot
-plot(y=filtered$Sub_metering_1, x=timeFormated, type="l", ylab = "Energy sub metering")
-lines(y=filtered$Sub_metering_2, x=timeFormated, col="red")
-lines(y=filtered$Sub_metering_3, x=timeFormated, col="blue")
+plot(y=as.numeric(as.character(filtered$Sub_metering_1)), x=timeFormated, type="l", ylab = "Energy sub metering")
+lines(y=as.numeric(as.character(filtered$Sub_metering_2)), x=timeFormated, col="red")
+lines(y=as.numeric(as.character(filtered$Sub_metering_3)), x=timeFormated, col="blue")
 legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty = 1, col = c("black", "red", "blue"))
 
 ## Fourth Plot
